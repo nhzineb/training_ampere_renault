@@ -14,7 +14,7 @@ view: users {
 
   dimension: age_group {
     type: tier
-    tiers: [20, 40, 60, 80]
+    tiers: [18, 25, 50, 80]
     style:  integer
     sql: ${age} ;;
   }
@@ -34,6 +34,12 @@ view: users {
     timeframes: [raw, time, date, week, month, quarter, year]
     sql: ${TABLE}.created_at ;;
   }
+
+  dimension: city_state {
+    type: string
+    sql: CONCAT(${city}, ', ', ${state}) ;;
+  }
+
 
 #Number of days/weeks/months/years since user created
   dimension_group: since_signup {
@@ -150,9 +156,12 @@ view: users {
   dimension: traffic_source {
     type: string
     sql: ${TABLE}.traffic_source ;;
-
   }
 
+  dimension: is_email_traffic {
+    type: yesno
+    sql: ${traffic_source} = 'Email' ;;
+  }
 #####################################
 #-----MEASURES------------------------
 
