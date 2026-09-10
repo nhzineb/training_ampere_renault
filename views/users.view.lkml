@@ -153,6 +153,24 @@ view: users {
 
   }
 
+  dimension: city_state {
+    type: string
+    sql: CONCAT(${city}, ', ', ${state}) ;;
+  }
+  dimension: age_tier {
+    type: tier
+    tiers: [18, 25, 50, 80]
+    style: integer
+    sql: ${age} ;;
+  }
+
+  dimension: is_email_traffic {
+    type: yesno
+    sql: ${traffic_source} = 'Email' ;;
+  }
+
+
+
 #####################################
 #-----MEASURES------------------------
 
