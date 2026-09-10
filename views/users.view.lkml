@@ -153,6 +153,12 @@ view: users {
 
   }
 
+  dimension: City_State {
+    type: string
+    sql: CONCAT(${city}, ', ', ${state}) ;;
+
+  }
+
 #####################################
 #-----MEASURES------------------------
 
