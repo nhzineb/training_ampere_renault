@@ -1,4 +1,4 @@
-connection: "bigquery_connection"
+connection: "training-ampere-looker"
 
 # include all the views
 # include: "/views/**/*.view.lkml"
