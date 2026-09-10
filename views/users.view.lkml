@@ -153,20 +153,17 @@ view: users {
 
   }
   dimension: city_state {
-    label: "City State"
     type: string
     sql: CONCAT(${city}, ' - ', ${state}) ;;
   }
 
   dimension: age_tier {
-    label: "Age Group"
     type: tier
     tiers: [18, 25, 50, 80]
     sql: ${age} ;;
   }
 
   dimension: is_email_source {
-    label: "Email Source?"
     type: yesno
     sql: ${traffic_source} = 'Email' ;;
   }
