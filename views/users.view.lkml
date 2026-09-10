@@ -155,7 +155,7 @@ view: users {
   dimension: city_state {
     label: "City State"
     type: string
-    sql: CONCAT(${city}, ', ', ${state}) ;;
+    sql: CONCAT(${city}, ' - ', ${state}) ;;
   }
 
   dimension: age_tier {
