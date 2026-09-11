@@ -66,6 +66,11 @@ view: users {
     type: string
     sql: ${TABLE}.email ;;
   }
+# ______________Adding is_mail dimetion__________
+  dimension: is_email {
+    type: yesno
+    sql: ${TABLE}.traffic_source = 'Email' ;;
+  }
   dimension: first_name {
     type: string
     sql: ${TABLE}.first_name ;;
