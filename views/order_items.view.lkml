@@ -120,7 +120,6 @@ view: order_items {
     sql: MAX(${created_date}) ;;
 
   }
-
 #_______________Adding count_distinct_orders measures___________
   measure: count_distinct_orders {
     type: count_distinct
