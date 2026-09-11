@@ -137,6 +137,24 @@ view: order_items {
     sql: ${sale_price} ;;
   }
 
+  ######################## Advanced Field ##############################3
+  measure: email_total_sales {
+    type: sum
+    sql: ${sale_price} ;;
+    filters: [users.traffic_source: "Email"]
+  }
+
+  measure: email_sales_percentage {
+    type: number
+    sql: SAFE_DIVIDE(${email_total_sales}, ${total_sales}) ;;
+    value_format_name: percent_2
+  }
+
+  measure: average_spend_per_user {
+    type: number
+    sql: SAFE_DIVIDE(${total_sales}, ${email_sales_percentage}) ;;
+    value_format_name: usd
+  }
 #--------
 
   # measure: dynamic_count {
