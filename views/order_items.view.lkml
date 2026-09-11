@@ -135,6 +135,7 @@ view: order_items {
 
   measure: Avg_Sales {
     type: average
+    value_format_name: usd
     sql: (${sale_price}) ;;
   }
 
