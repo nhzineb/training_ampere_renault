@@ -139,6 +139,27 @@ view: order_items {
     sql: (${sale_price}) ;;
   }
 
+  measure: total_sales_via_email {
+    type: sum
+    sql: ${sale_price} ;;
+    filters: [users.traffic_source: "Email"]
+  }
+
+  measure: pct_sales_via_email {
+    type: number
+    value_format_name: percent_2
+    sql: ${total_sales_via_email} / NULLIF(${Total_Sales}, 0) ;;
+  }
+
+  measure: avg_spend_per_user {
+    type: number
+    value_format_name: usd
+    sql: ${total_sales_via_email} / NULLIF(${users.count}, 0) ;;
+  }
+
+
+
+
 
 #--------
 
