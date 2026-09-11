@@ -120,6 +120,22 @@ view: order_items {
     sql: MAX(${created_date}) ;;
 
   }
+  ################################# Task-1 ######################
+  measure: distinct_orders {
+    type: count_distinct
+    sql: ${order_id} ;;
+  }
+
+  ################################# Task-2 ######################
+  measure: total_sales {
+    type: sum
+    sql: ${sale_price} ;;
+  }
+  ################################# Task-3 ######################
+  measure: average_sales {
+    type: average
+    sql: ${sale_price} ;;
+  }
 
 #--------
 
