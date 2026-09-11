@@ -120,9 +120,59 @@ view: order_items {
     sql: MAX(${created_date}) ;;
 
   }
+# Ampere training excercises
 
-#--------
+  # Task 1: Distinct Number of Orders
+  measure: distinct_orders {
+    type: count_distinct
+    sql: ${order_id} ;;
+  }
 
+  # Task 2: Total Sales
+  measure: total_sales {
+    type: sum
+    sql: ${sale_price} ;;
+    value_format_name: usd
+  }
+
+  # Task 3: Average Sales
+  measure: average_sales {
+    type: average
+    sql: ${sale_price} ;;
+    value_format_name: usd
+  }
+
+#-------- task 1 : Total sales for the email traffic source
+
+  measure: email_sales {
+    type: sum
+    sql: ${sale_price} ;;
+    filters: [users.traffic_source: "Email"]
+    value_format_name: usd
+  }
+ #----- task 2 percentage id sales from email traffic source
+
+  measure: percent_email_sales {
+    type: number
+    sql: ${email_sales} / NULLIF(${total_sales}, 0) ;;
+    value_format_name: percent_2
+  }
+
+#---- task 3 average spend per user
+  measure: user_count {
+    type: count_distinct
+    sql: ${user_id} ;;
+  }
+
+
+  measure: average_spend_per_user {
+    type: number
+    sql: ${total_sales} / NULLIF(${user_count}, 0) ;;
+    value_format_name: usd
+  }
+
+
+  #------ task 3
   # measure: dynamic_count {
   #   type: count_distinct
   #   sql: ${TABLE}.{% parameter item_to_count %} ;;
