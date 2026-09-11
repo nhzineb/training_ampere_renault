@@ -142,7 +142,11 @@ view: order_items {
     filters: [users.traffic_source: "Email"]
     value_format_name: usd
   }
-
+  measure: email_sales {
+    type: number
+    sql: ${email_total_sales} / NULLIF (${total_sales}, 0) ;;
+    value_format_name: percent_2
+ }
 #--------
 
   # measure: dynamic_count {
