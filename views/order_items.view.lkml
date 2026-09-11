@@ -120,6 +120,28 @@ view: order_items {
     sql: MAX(${created_date}) ;;
 
   }
+  measure: count_orders {
+    type: count_distinct
+    sql: ${order_id} ;;
+    value_format_name: usd
+  }
+  measure: total_sales {
+    type: sum
+    sql: ${sale_price} ;;
+    value_format_name: usd
+  }
+  measure: average_sales {
+    type: average
+    sql: ${sale_price} ;;
+    value_format_name: usd
+  }
+
+  measure: email_total_sales {
+    type: sum
+    sql: ${sale_price} ;;
+    filters: [users.traffic_source: "Email"]
+    value_format_name: usd
+  }
 
 #--------
 

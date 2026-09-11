@@ -16,7 +16,6 @@ view: users {
     type: string
     sql: CONCAT(${city}, '_ ', ${state}) ;;
      }
-
   dimension: age_group {
     type: tier
     tiers: [20, 40, 60, 80]
