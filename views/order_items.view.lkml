@@ -126,6 +126,7 @@ view: order_items {
     sql: ${sale_price} ;;
 
     filters: [users.traffic_source: "Email"]
+    value_format_name: usd
   }
 #_______________Adding count_distinct_orders measures___________
   measure: count_distinct_orders {
@@ -143,6 +144,12 @@ view: order_items {
   measure: email_sales_pct {
     type: number
     sql: ${email_sales} / NULLIF(${total_sales}, 0) ;;
+    value_format_name: percent_2
+  }
+  measure: avg_spend_per_user {
+    type: number
+    sql: ${total_sales} / NULLIF(${users.count}, 0) ;;
+    value_format_name: usd
   }
 
 #--------
