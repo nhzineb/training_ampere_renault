@@ -129,6 +129,10 @@ view: order_items {
     type: sum
     sql: ${sale_price} ;;
   }
+  measure: average_sales {
+    type: average
+    sql: ${sale_price} ;;
+  }
 
 #--------
 
