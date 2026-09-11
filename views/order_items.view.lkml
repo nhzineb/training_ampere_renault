@@ -120,6 +120,13 @@ view: order_items {
     sql: MAX(${created_date}) ;;
 
   }
+
+  measure: email_sales {
+    type: sum
+    sql: ${sale_price} ;;
+
+    filters: [users.traffic_source: "Email"]
+  }
 #_______________Adding count_distinct_orders measures___________
   measure: count_distinct_orders {
     type: count_distinct
