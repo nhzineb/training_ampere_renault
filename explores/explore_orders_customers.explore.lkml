@@ -3,6 +3,7 @@ include: "/views/orders.view"
 include: "/views/order_items.view"
 include: "/views/products.view"
 
+
 ##--------------------------------------
 
 explore: orders_customers {
@@ -28,9 +29,8 @@ explore: orders_customers {
     relationship: many_to_one
   }
 
+
 }
-
-
 ###----------Extends example ----------
 
 # explore: order_items_last_90_days {
