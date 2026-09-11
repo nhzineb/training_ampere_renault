@@ -2,6 +2,7 @@ include: "/views/users.view"
 include: "/views/orders.view"
 include: "/views/order_items.view"
 include: "/views/products.view"
+include: "/views/user_facts.view"
 
 ##--------------------------------------
 
@@ -25,6 +26,12 @@ explore: orders_customers {
   join: products {
     type: left_outer
     sql_on: ${order_items.product_id} = ${products.id} ;;
+    relationship: many_to_one
+  }
+
+  join: user_facts {
+    type: left_outer
+    sql_on: ${order_items.user_id} = ${user_facts.user_id} ;;
     relationship: many_to_one
   }
 

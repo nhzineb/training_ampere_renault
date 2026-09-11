@@ -1,10 +1,11 @@
 connection: "training-ampere-looker"
 
 # include all the views
-# include: "/views/**/*.view.lkml"
+include: "/views/**/*.view.lkml"
 include: "/explores/explore_orders_customers.explore"
 include: "/explores/explore_inventory_products.explore.lkml"
 include: "/explores/explore_events_users.explore.lkml"
+explore : user_facts {}
 
 #test
 include: "/dashboards/overview.dashboard.lookml"
