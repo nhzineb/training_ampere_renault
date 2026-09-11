@@ -140,6 +140,10 @@ view: order_items {
     type: average
     sql: ${sale_price} ;;
   }
+  measure: email_sales_pct {
+    type: number
+    sql: ${email_sales} / NULLIF(${total_sales}, 0) ;;
+  }
 
 #--------
 
