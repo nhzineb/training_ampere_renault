@@ -121,6 +121,14 @@ view: order_items {
 
   }
 
+  # activity
+  measure: Distinct_Orders {
+    type: count_distinct
+    sql: (${order_id}) ;;
+
+  }
+
+
 #--------
 
   # measure: dynamic_count {
