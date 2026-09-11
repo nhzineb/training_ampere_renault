@@ -152,6 +152,12 @@ view: users {
     sql: ${TABLE}.traffic_source ;;
 
   }
+  # -------------Concat of State and City Name________
+  dimension: city_state_concate {
+    type: string
+    sql: CONCAT(${city}, ' - ', ${state}) ;;
+
+  }
 
 #####################################
 #-----MEASURES------------------------
