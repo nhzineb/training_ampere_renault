@@ -121,6 +121,12 @@ view: order_items {
 
   }
 
+#_______________Adding count_distinct_orders measures___________
+  measure: count_distinct_orders {
+    type: count_distinct
+    sql: ${order_id} ;;
+  }
+
 #--------
 
   # measure: dynamic_count {
