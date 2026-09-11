@@ -154,10 +154,19 @@ view: order_items {
   measure: avg_spend_per_user {
     type: number
     value_format_name: usd
-    sql: ${total_sales_via_email} / NULLIF(${users.count}, 0) ;;
+    sql: ${Total_Sales} / NULLIF(${users.count}, 0) ;;
   }
 
+  measure: user_count {
+    type: count_distinct
+    sql: ${user_id} ;;
+  }
 
+  measure: average_spend_per_user {
+    type: number
+    sql: ${total_sale_price} / NULLIF(${user_count}, 0) ;;
+    value_format_name: usd
+  }
 
 
 
