@@ -1,29 +1,28 @@
-view: user_facts {
-    derived_table: {
-      explore_source: orders_customers {
-        column: id { field: users.id }
-        column: total_sale_price { field: order_items.total_sale_price }
-      }
+view: geography_dimensions {
+  extension: required
+
+    dimension: city {
+      sql: ${TABLE}.city ;;
     }
-    dimension: id {
-      description: ""
-      type: number
-      primary_key:yes
+
+    dimension: state {
+      sql: ${TABLE}.state ;;
     }
-    dimension: total_sale_price {
-      description: "Total revenue from all items, including returned"
-      value_format: "$#,##0.00"
+
+    dimension: country {
+      sql: ${TABLE}.country ;;
+    }
+
+    dimension: latitude {
       type: number
-   }
+      sql: ${TABLE}.latitude ;;
+    }
 
-  measure: average_lifetime_spend {
-    type: average
-    value_format_name: usd
-    sql: ${total_sale_price} ;;
-  }
-
-
-  # # You can specify the table name if it's different from the view name:
+    dimension: longitude {
+      type: number
+      sql: ${TABLE}.longitude ;;
+    }
+    # # You can specify the table name if it's different from the view name:
   # sql_table_name: my_schema_name.tester ;;
   #
   # # Define your dimensions and measures here, like this:
@@ -53,7 +52,7 @@ view: user_facts {
   # }
 }
 
-# view: user_facts {
+# view: geography_dimensions_view {
 #   # Or, you could make this view a derived table, like this:
 #   derived_table: {
 #     sql: SELECT

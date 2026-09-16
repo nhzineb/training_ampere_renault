@@ -1,4 +1,6 @@
+include: "geography_dimensions.view"
 view: users {
+  extends: [geography_dimensions]
   sql_table_name: `bigquery-public-data.thelook_ecommerce.users` ;;
   drill_fields: [id]
 
