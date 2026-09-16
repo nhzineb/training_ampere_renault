@@ -1,4 +1,6 @@
+include: "/views/geography_dimensions.view"
 view: events {
+  extends: [geography_dimensions_view]
   sql_table_name: `bigquery-public-data.thelook_ecommerce.events` ;;
   drill_fields: [id]
 

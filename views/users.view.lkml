@@ -1,4 +1,6 @@
+include: "/views/geography_dimensions.view"
 view: users {
+  extends: [geography_dimensions_view]
   sql_table_name: `bigquery-public-data.thelook_ecommerce.users` ;;
   drill_fields: [id]
 
@@ -20,25 +22,25 @@ view: users {
   }
 
 
-  dimension: city {
-    type: string
-    sql: ${TABLE}.city ;;
-  }
-  dimension: country {
-    type: string
-    map_layer_name: countries
-    sql: ${TABLE}.country ;;
-  }
+  # dimension: city {
+  #   type: string
+  #   sql: ${TABLE}.city ;;
+  # }
+  # dimension: country {
+  #   type: string
+  #   map_layer_name: countries
+  #   sql: ${TABLE}.country ;;
+  # }
   dimension_group: created {
     type: time
     timeframes: [raw, time, date, week, month, quarter, year]
     sql: ${TABLE}.created_at ;;
   }
 
-  dimension: city_state {
-    type: string
-    sql: CONCAT(${city}, ', ', ${state}) ;;
-  }
+  # dimension: city_state {
+  #   type: string
+  #   sql: CONCAT(${city}, ', ', ${state}) ;;
+  # }
 
 
 #Number of days/weeks/months/years since user created
@@ -89,17 +91,17 @@ view: users {
 
   #####################################
 
-  dimension: latitude {
-    type: number
-    sql: ${TABLE}.latitude ;;
-    group_label: "Location"
-  }
+  # dimension: latitude {
+  #   type: number
+  #   sql: ${TABLE}.latitude ;;
+  #   group_label: "Location"
+  # }
 
-  dimension: longitude {
-    type: number
-    sql: ${TABLE}.longitude ;;
-    group_label: "Location"
-  }
+  # dimension: longitude {
+  #   type: number
+  #   sql: ${TABLE}.longitude ;;
+  #   group_label: "Location"
+  # }
 
   dimension: location {
     label: "User location"
