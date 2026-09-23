@@ -168,6 +168,36 @@ view: order_items {
     value_format_name: usd
   }
 
+  #--------------------------#
+  parameter: date_granularity_selector {
+    type: unquoted
+    allowed_value: {
+      label: "Created Date"
+      value: "created_date"
+    }
+    allowed_value: {
+      label: "Created Week"
+      value: "created_week"
+    }
+    allowed_value: {
+      label: "Created Month"
+      value: "created_month"
+    }
+    default_value: "created_month"
+  }
+
+  dimension: dynamic_timeframe {
+    type: date
+    sql:
+       {% if date_granularity_selector._parameter_value == 'created_date' %}
+         ${created_date}
+       {% elsif date_granularity_selector._parameter_value == 'created_week' %}
+         ${created_week}
+       {% else %}
+         ${created_month}
+       {% endif %} ;;
+  }
+
 
 
 #--------
