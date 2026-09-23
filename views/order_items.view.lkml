@@ -198,7 +198,10 @@ view: order_items {
        {% endif %} ;;
   }
 
-
+  dimension: large_order {
+    type: yesno
+    sql: ${sale_price} > @{large_value_threshold} ;;
+  }
 
 #--------
 
