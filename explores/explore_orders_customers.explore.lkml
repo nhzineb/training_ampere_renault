@@ -29,7 +29,10 @@ explore: orders_customers {
     relationship: many_to_one
   }
 
-
+  access_filter: {
+    user_attribute: country
+    field: users.country
+  }
 }
 ###----------Extends example ----------
 
