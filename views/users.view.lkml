@@ -18,12 +18,34 @@ view: users {
     style:  integer
     sql: ${age} ;;
   }
+ #Task2 (Individual ages using tiring)
+  dimension: age_group_2 {
+    type: tier
+    tiers: [18, 25, 50, 80]
+    style:  integer
+    sql: ${age} ;;
+  }
+
+#Task3 (Is Traffic source Email (Yes/No)
+  dimension: is_traffic_source_email {
+    description: "Yes means traffic source is email else No"
+    type: yesno
+    sql: ${traffic_source} = 'Email' ;;
+
+  }
 
 
   dimension: city {
     type: string
     sql: ${TABLE}.city ;;
   }
+
+  #Task1(Combine City and State)
+  dimension: city_state {
+    type: string
+    sql: concat(${city},"-",${state}) ;;
+  }
+
   dimension: country {
     type: string
     map_layer_name: countries
