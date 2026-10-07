@@ -134,10 +134,35 @@ view: order_items {
     sql: ${sale_price} ;;
   }
 
+
 #Task (Total sales)
   measure: task_average_sales{
     type: average
     sql: ${sale_price} ;;
+  }
+
+#Task(Total sale to users came from Traffic source = Email)
+  measure: total_sale_made_to_email_traffic_users{
+    type: sum
+    sql: ${sale_price} ;;
+    filters: [users.traffic_source:"Email"]
+    value_format_name: usd
+  }
+
+#Task(Total sale made to users came from Traffic source = Email / Toatal sales)
+  measure: email_traffic_users_sales_contribution{
+    type: number
+    sql: ${total_sale_made_to_email_traffic_users} / NUllIF(${task_total_sales},0) ;;
+    value_format_name: "percent_1"
+
+  }
+
+#Task(Average amount each  user is speding)
+  measure: avg_amount_spent_by_users{
+    type: number
+    sql: ${task_total_sales}/ NUllIF(${users.count},0) ;;
+    value_format_name: usd
+
   }
 
 #--------
