@@ -56,6 +56,7 @@ view: order_items {
     sql: ${TABLE}.user_id ;;
   }
 
+
   ######--------- measure -----------
 
 
@@ -166,6 +167,25 @@ view: order_items {
 
   # # ----- parameter ------
 
+  parameter: date_granularity_selector {
+    type: unquoted
+    default_value: "created_month"
+
+    allowed_value: {
+      label: "Date"
+      value: "created_date"
+    }
+
+    allowed_value: {
+      label: "Week"
+      value: "created_week"
+    }
+
+    allowed_value: {
+      label: "Month"
+      value: "created_month"
+    }
+  }
   # parameter: item_to_count {
   #   type: unquoted
   #   allowed_value: {
@@ -195,6 +215,20 @@ view: order_items {
   #   html: Welcome {{ _user_attributes['first_name']}} {{ _user_attributes['last_name']}}! ;;
   # }
 
+ dimension: dynamic_timeframe {
+    type: string
+    sql:
+    {% if date_granularity_selector._parameter_value == 'created_date' %}
+      ${created_date}
+
+      {% elsif date_granularity_selector._parameter_value == 'created_week' %}
+      ${created_week}
+
+      {% else %}
+      ${created_month}
+
+      {% endif %} ;;
+  }
 
 
 
