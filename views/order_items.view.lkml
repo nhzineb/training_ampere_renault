@@ -121,6 +121,25 @@ view: order_items {
 
   }
 
+  #Task(Distinct orders ciunt)
+
+  measure: task_distinct_order_counts{
+    type: count_distinct
+    sql: ${order_id} ;;
+  }
+
+  #Task (Total sales)
+  measure: task_total_sales{
+    type: sum
+    sql: ${sale_price} ;;
+  }
+
+#Task (Total sales)
+  measure: task_average_sales{
+    type: average
+    sql: ${sale_price} ;;
+  }
+
 #--------
 
   # measure: dynamic_count {
