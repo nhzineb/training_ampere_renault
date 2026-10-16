@@ -56,6 +56,103 @@ view: order_items {
     sql: ${TABLE}.user_id ;;
   }
 
+
+  dimension: navbar {
+    label: "Navbar"
+    type: yesno
+    allow_fill: yes
+    sql: true ;;
+    html:
+    {% assign current_dash = _explore._dashboard_url %}
+
+          {% comment %}
+          1. Dynamically build the query string from any active filter wired to the Navbar tile.
+          Format: &<Target_Dashboard_Filter_UI_Title>=<Encoded_Filter_Value>
+          {% endcomment %}
+
+          {% assign nav_params = "" %}
+
+      {% assign f_month = _filters['order_items.created_month'] | url_encode %}
+      {% if f_month != "" %}
+      {% assign nav_params = nav_params | append: "&Month=" | append: f_month %}
+      {% endif %}
+
+      {% assign f_status = _filters['order_items.status'] | url_encode %}
+      {% if f_status != "" %}
+      {% assign nav_params = nav_params | append: "&Status=" | append: f_status %}
+      {% endif %}
+
+      {% assign f_brand = _filters['products.brand'] | url_encode %}
+      {% if f_brand != "" %}
+      {% assign nav_params = nav_params | append: "&Brand=" | append: f_brand %}
+      {% endif %}
+
+      {% assign f_category = _filters['products.category'] | url_encode %}
+      {% if f_category != "" %}
+      {% assign nav_params = nav_params | append: "&Category=" | append: f_category %}
+      {% endif %}
+
+      {% comment %} Turn the first '&' into '?' if at least one filter is active {% endcomment %}
+      {% if nav_params != "" %}
+      {% assign nav_params = nav_params | replace_first: "&", "?" %}
+      {% endif %}
+
+      <div style="font-family: 'Google Sans', Roboto, sans-serif; padding: 12px; background: #f8f9fa; border-radius: 8px; border: 1px solid #dadce0; text-align: left;">
+      <div style="font-size: 16px; font-weight: 700; color: #1a73e8; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid #1a73e8;">
+      🧭 Ampere Analytics Portal
+      </div>
+
+      <details open style="margin-bottom: 10px;">
+      <summary style="font-weight: 600; font-size: 14px; color: #202124; cursor: pointer; padding: 6px; background: #e8f0fe; border-radius: 4px;">
+      📁 1. IVV & Traceability
+      </summary>
+      <div style="padding-left: 14px; margin-top: 6px;">
+      <details open style="margin-bottom: 6px;">
+      <summary style="font-weight: 500; font-size: 13px; color: #3c4043; cursor: pointer; padding: 4px;">
+      📂 1.1 Last Run Execution
+      </summary>
+      <div style="padding-left: 16px; margin-top: 4px; font-size: 13px;">
+      <a href="/dashboards/12{{ nav_params }}" style="display: block; margin-bottom: 6px; text-decoration: none; {% if current_dash contains '/dashboards/12' %}color: #1a73e8; font-weight: 700;{% else %}color: #5f6368;{% endif %}">📊 Global Last Run Cockpit</a>
+      <a href="/dashboards/2{{ nav_params }}" style="display: block; margin-bottom: 6px; text-decoration: none; {% if current_dash contains '/dashboards/2' %}color: #1a73e8; font-weight: 700;{% else %}color: #5f6368;{% endif %}">📈 Test Sets Progression</a>
+      </div>
+      </details>
+
+      <details open style="margin-bottom: 6px;">
+      <summary style="font-weight: 500; font-size: 13px; color: #3c4043; cursor: pointer; padding: 4px;">
+      📂 1.2 Requirements (Codebeamer)
+      </summary>
+      <div style="padding-left: 16px; margin-top: 4px; font-size: 13px;">
+      <a href="/dashboards/3{{ nav_params }}" style="display: block; margin-bottom: 6px; text-decoration: none; {% if current_dash contains '/dashboards/3' %}color: #1a73e8; font-weight: 700;{% else %}color: #5f6368;{% endif %}">📋 Horizontal Traceability</a>
+      <a href="/dashboards/4{{ nav_params }}" style="display: block; margin-bottom: 6px; text-decoration: none; {% if current_dash contains '/dashboards/4' %}color: #1a73e8; font-weight: 700;{% else %}color: #5f6368;{% endif %}">🔍 Baseline Comparison</a>
+      </div>
+      </details>
+      </div>
+      </details>
+
+      <details open style="margin-bottom: 10px;">
+      <summary style="font-weight: 600; font-size: 14px; color: #202124; cursor: pointer; padding: 6px; background: #f1f3f4; border-radius: 4px;">
+      📁 2. VIP FinOps & Billing
+      </summary>
+      <div style="padding-left: 14px; margin-top: 6px;">
+      <details open style="margin-bottom: 6px;">
+      <summary style="font-weight: 500; font-size: 13px; color: #3c4043; cursor: pointer; padding: 4px;">
+      📂 2.1 GKE & Cloud Costs
+      </summary>
+      <div style="padding-left: 16px; margin-top: 4px; font-size: 13px;">
+      <a href="/dashboards/11{{ nav_params }}" style="display: block; margin-bottom: 6px; text-decoration: none; {% if current_dash contains '/dashboards/11' %}color: #1a73e8; font-weight: 700;{% else %}color: #5f6368;{% endif %}">💶 VIP Cost Overview</a>
+      <a href="/dashboards/6{{ nav_params }}" style="display: block; margin-bottom: 6px; text-decoration: none; {% if current_dash contains '/dashboards/6' %}color: #1a73e8; font-weight: 700;{% else %}color: #5f6368;{% endif %}">⚙️ GKE Namespace Split</a>
+      </div>
+      </details>
+      </div>
+      </details>
+      </div>
+      ;;
+
+    }
+
+
+
+
   ######--------- measure -----------
 
 
